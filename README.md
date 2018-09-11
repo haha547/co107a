@@ -13,3 +13,6 @@
 專案作品   | [project](project)
 學習筆記   | [wiki](../../wiki)
 疑問解答   | [issue](https://github.com/cccnqu/co106a/issues)
+
+
+READMＥ檔新增一點點git 測試
