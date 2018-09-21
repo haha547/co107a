@@ -1,0 +1,21 @@
+// This file is part of www.nand2tetris.org
+// and the book "The Elements of Computing Systems"
+// by Nisan and Schocken, MIT Press.
+// File name: projects/01/Not.hdl
+
+/**
+ * xor gate
+ */
+
+CHIP xor {
+    IN a,b;
+    OUT out;
+
+    PARTS:
+    Nand(a=a, b=a, out=nota);
+    Nand(a=b, b=b, out=notb);
+    Nand(a=nota, b=b, out=t1);
+    Nand(a=a, b=notb, out=t2);
+    Nand(a=t1, b=t2, out=out);
+    
+}

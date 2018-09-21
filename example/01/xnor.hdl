@@ -1,0 +1,30 @@
+// This file is part of www.nand2tetris.org
+// and the book "The Elements of Computing Systems"
+// by Nisan and Schocken, MIT Press.
+// File name: projects/01/Not.hdl
+
+/**
+ * xnor gate
+ */
+
+CHIP xnor {
+    IN a,b;
+    OUT out;
+//教科書上＋迪摩根定律
+    PARTS:
+    Nand(a=a, b=a, out=AnandA);                             //Nand1
+    Nand(a=b, b=b, out=BnandB);                             //Nand2
+    Nand(a=AnandA, b=BnandB, out=t1);         //Nand3
+    Nand(a=b, b=b, out=AnandB);                             //Nand4
+    Nand(a=t1, b=AnandB, out=out);            //Nand5
+    
+/**
+github上
+    PARTS:
+    Nand(a=a, b=b, out=nandab);
+    Nand(a=a, b=nandab, out=i1);
+    Nand(a=nandab, b=b, out=i2);
+    Nand(a=i1, b=i2, out=axorb);
+    Nand(a=axorb, b=axorb, out=out);
+    */
+}
