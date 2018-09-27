@@ -12,4 +12,11 @@
 練習作業   | [exercise](exercise)
 專案作品   | [project](project)
 學習筆記   | [wiki](../../wiki)
+<<<<<<< HEAD
 疑問解答   | [issue](https://github.com/cccnqu/co107a/issues)
+=======
+疑問解答   | [issue](https://github.com/cccnqu/co106a/issues)
+
+
+READMＥ檔新增一點點git 測試
+>>>>>>> 1f7de46384c4353a68b36eec05cc0f0b33b5e368
