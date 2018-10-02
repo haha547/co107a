@@ -43,4 +43,39 @@ CHIP ALU {
 
     PARTS:
    // Put you code here:
+    Not16(in=x, out=noTX);
+    Not16(in=y, out=noTY);
+
+    Mux4Way16(a=x, b=false, c=noTX, d=true, sel[0]=zx, sel[1]=nx, out=finalX);
+
+//  sel[0]==0 && sel[1] == 0 -->x
+//  sel[0]==0 && sel[1] == 1 -->all zero
+//  sel[0]==1 && sel[1] == 0 -->noTX
+//  sel[0]==1 && sel[1] == 1 -->true
+
+    Mux4Way16(a=y, b=false, c=noTY, d=true, sel[0]=zy, sel[1]=ny, out=finalY);
+
+//  sel[0]==0 && sel[1] == 0 -->x
+//  sel[0]==0 && sel[1] == 1 -->all zero
+//  sel[0]==1 && sel[1] == 0 -->noTX
+//  sel[0]==1 && sel[1] == 1 -->true
+
+//  doing f functions
+    And16(a=finalX, b=finalY, out=andXY);
+    Add16(a=finalX, b=finalY, out=plusrXY);
+    Mux16(a=andXY, b=plusrXY, sel=f, out=result);
+
+// no !result||result
+    Not16(in=result, out=negateResult);
+    Mux16(a=result, b=negateResult, sel=no, out=out, out[0..7]=out7, out[8..15]=out15, out[15]=negative);//拆成2個8bits後面比較好做
+
+    Or8Way(in=out7, out=any7);
+    Or8Way(in=out15, out=any15);
+    Or(a=any7, b=any15, out=any);
+    Xor(a=any, b=true, out=zr);
+    //假如any==0,zr ==1
+    //假如any==1,zr ==0
+    //沒辦法用mux所以用xor
+//negate or not
+    And(a=negative, b=true, out=ng);
 }
