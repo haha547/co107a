@@ -16,5 +16,11 @@ CHIP PC {
     OUT out[16];
 
     PARTS:
-    // Put your code here:
+    Inc16(in = feedback, out = pc);//一開始從register抓一個 跟＋1
+
+    Mux16(a = feedback, b = pc, sel = inc, out = w0);//問他說要不要＋1
+    Mux16(a = w0, b = in, sel = load, out = w1);//要不要抓給他的值
+    Mux16(a = w1, b = false, sel = reset, out = cout);//有重設就全部變0所以要最後
+    
+    Register(in = cout, load = true, out = out, out = feedback);
 }
